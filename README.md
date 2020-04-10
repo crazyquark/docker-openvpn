@@ -106,3 +106,47 @@ docker run ... --net=pia_network tutum/curl curl -s http://pia/
 
 The container is started within the same network as `pia` but is not behind the VPN.
 It can access services started behind the VPN container such as the HTTP service provided by `myservice`.
+
+# Sample Configuration
+This is a sample docker-compose file based on the one which I've been using.
+```
+version: "2.1"
+services:
+  pia-vpn:
+    container_name: pia-vpn
+    image: itsdaspecialk/pia-openvpn
+    restart: always
+    cap_add:
+      - net_admin
+    dns:
+      - 209.222.18.222
+      - 209.222.18.218
+    ports:
+      - 9091:9091
+    volumes:
+      - /path/on/host:/path/in/container:ro
+    environment:
+      REGION: "US East"
+    command: ["--auth-user-pass", "/path/in/container/auth.conf"]
+  transmission:
+    container_name: transmission
+    image: linuxserver/transmission
+    restart: always
+    network_mode: "service:pia-vpn"
+    depends_on:
+      - pia-vpn
+    volumes:
+      - /path/on/host:/config 
+      - /path/on/host:/downloads 
+  sabnzbd:
+    container_name: sabnzbd
+    image: linuxserver/sabnzbd
+    restart: always
+    network_mode: "service:pia-vpn"
+    depends_on:
+      - pia-vpn
+    volumes:
+      - /path/on/host:/config
+      - /path/on/host:/downloads 
+```
+
