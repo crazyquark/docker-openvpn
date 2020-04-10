@@ -11,7 +11,7 @@ activate_firewall() {
                          awk '$3 == "inet" {print $4}')
   # if the ovpn file exists, try to set the port from the file
   if [ -r "${REGION}.ovpn" ]; then
-    port=$(awk '/^remote / && NF ~ /^[0-9]*$/ {print $NF}' "${REGION}.ovpn" |
+    port=$(awk '/^remote / && NF ~ /^[0-9]*$/ {print $NF}' "${CONNECTIONSTRENGTH}\\${REGION}.ovpn" |
            grep ^ || echo 1197)
   fi
 
@@ -31,7 +31,7 @@ activate_firewall() {
 ARGS=
 
 if [ -n "$REGION" ]; then
-  ARGS="${ARGS}--config \"${REGION}.ovpn\""
+  ARGS="${ARGS}--config \"${CONNECTIONSTRENGTH}\"\"${REGION}.ovpn\""
 fi
 
 if [ -n "${USERNAME:-""}" -a -n "${PASSWORD:-""}" ]; then

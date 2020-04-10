@@ -69,6 +69,9 @@ docker run ... --name=pia \
     --auth-user-pass auth.conf
 ```
 
+## Specifying the connection strength
+You can also specify the connection strength using the environment variable `CONNECTIONSTRENGTH`. If it is not specified, it defaults to `strong`, but you could alternatively also specify `normal`.
+
 ## Connection between containers behind PIA
 Any container started with `--net=container:...` will use the same network stack as the PIA container, therefore they will share the same local IP address.
 
