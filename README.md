@@ -1,6 +1,6 @@
 [![logo](https://www.privateinternetaccess.com/assets/PIALogo2x-0d1e1094ac909ea4c93df06e2da3db4ee8a73d8b2770f0f7d768a8603c62a82f.png)](https://www.privateinternetaccess.com)
 
-# Imported from [https://bitbucket.org/ItsDaSpecialK/docker-openvpn/](https://bitbucket.org/ItsDaSpecialK/docker-openvpn/
+# Imported from https://bitbucket.org/ItsDaSpecialK/docker-openvpn/  
 
 # Private Internet Access
 A Centos Docker container for connecting to the PIA servers using OpenVPN, based on [colinherbert/pia-openvpn](https://hub.docker.com/r/colinhebert/pia-openvpn/)
